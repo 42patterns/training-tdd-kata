@@ -10,15 +10,17 @@ public class Calculator {
             return 0;
         }
 
-//        return addImperative(input);
-        return addFunctional(input);
+        return addImperative(input);
+//        return addFunctional(input);
     }
 
     private static Integer addImperative(String input) {
         final String[] el = input.split(DEFAULT_DELIMETER);
         int sum = 0;
         for (String e: el) {
-            sum += Integer.parseInt(e);
+            if (e.matches("[0-9]+")) {
+                sum += Integer.parseInt(e);
+            }
         }
 
         return sum;

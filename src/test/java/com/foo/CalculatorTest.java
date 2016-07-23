@@ -39,4 +39,12 @@ public class CalculatorTest {
         assertThat(result, equalTo(25));
     }
 
+    @Test
+    public void should_ignore_non_numeric() {
+        final String input = "5,,a,b,4";
+        Integer result = Calculator.add(input);
+
+        assertThat(result, equalTo(9));
+    }
+
 }

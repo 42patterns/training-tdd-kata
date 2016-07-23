@@ -1,8 +1,7 @@
 package com.foo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Calculator {
     final static String DEFAULT_DELIMETER = "[\n,]";
@@ -12,8 +11,8 @@ public class Calculator {
             return 0;
         }
 
-        return addImperative(input);
-//        return addFunctional(input);
+//        return addImperative(input);
+        return addFunctional(input);
     }
 
     private static Integer addImperative(String input) {
@@ -42,10 +41,20 @@ public class Calculator {
     }
 
     private static Integer addFunctional(String input) {
-        return Arrays.stream(input.split(DEFAULT_DELIMETER))
-                .filter(s -> s.matches("[0-9]+"))
+        Map<Boolean, List<Integer>> collect = Arrays.stream(input.split(DEFAULT_DELIMETER))
+                .filter(s -> s.matches("-?[0-9]+"))
                 .map(Integer::parseInt)
                 .filter(i -> i < 1000)
+                .collect(Collectors.partitioningBy(i -> i > 0));
+
+        List<Integer> positive = collect.getOrDefault(true, Collections.emptyList());
+        List<Integer> negative = collect.getOrDefault(false, Collections.emptyList());
+
+        if (!negative.isEmpty()) {
+            throw new NegativesNotAllowedException(negative);
+        }
+
+        return positive.stream()
                 .reduce(Integer::sum)
                 .orElse(0);
     }

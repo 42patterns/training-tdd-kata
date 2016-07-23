@@ -10,8 +10,8 @@ public class Calculator {
             return 0;
         }
 
-        return addImperative(input);
-//        return addFunctional(input);
+//        return addImperative(input);
+        return addFunctional(input);
     }
 
     private static Integer addImperative(String input) {
@@ -28,6 +28,7 @@ public class Calculator {
 
     private static Integer addFunctional(String input) {
         return Arrays.stream(input.split(DEFAULT_DELIMETER))
+                .filter(s -> s.matches("[0-9]+"))
                 .map(Integer::parseInt)
                 .reduce(Integer::sum)
                 .orElse(0);

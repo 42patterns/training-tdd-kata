@@ -6,6 +6,23 @@ public class Calculator {
             return 0;
         }
 
-        return Integer.parseInt(input);
+        return addImperative(input);
+//        return addFunctional(input);
+    }
+
+    private static Integer addImperative(String input) {
+        final String delimiter = ",";
+
+        final String[] el = input.split(delimiter);
+        int sum = 0;
+        for (String e: el) {
+            sum += Integer.parseInt(e);
+        }
+
+        return sum;
+    }
+
+    private static Integer addFunctional(String input) {
+        return null;
     }
 }

@@ -47,4 +47,12 @@ public class CalculatorTest {
         assertThat(result, equalTo(9));
     }
 
+    @Test
+    public void should_ignore_number_bigger_than_1000() {
+        final String input = "5,6,1,1000";
+        Integer result = Calculator.add(input);
+
+        assertThat(result, equalTo(12));
+    }
+
 }

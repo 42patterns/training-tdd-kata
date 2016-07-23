@@ -2,6 +2,8 @@ package com.foo;
 
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -71,6 +73,24 @@ public class CalculatorTest {
 
     }
 
+    @Test
+    public void should_expect_exception_for_negative() {
+        final String input = "5,-6,-4,b,4";
+
+        Optional<Throwable> exception = catchThrowable(() -> Calculator.add(input));
+        assertThat(exception.isPresent(), equalTo(true));
+        assertThat(exception.get().getMessage(), containsString("-4"));
+        assertThat(exception.get().getMessage(), containsString("-6"));
+    }
+
+    private Optional<Throwable> catchThrowable(Runnable r) {
+        try {
+            r.run();
+            return Optional.empty();
+        } catch (Exception e) {
+            return Optional.of(e);
+        }
+    }
 
 
 

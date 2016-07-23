@@ -2,8 +2,10 @@ package com.foo;
 
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class CalculatorTest {
 
@@ -54,5 +56,22 @@ public class CalculatorTest {
 
         assertThat(result, equalTo(12));
     }
+
+    @Test
+    public void should_throw_exeption_on_negative() {
+        final String input = "5,-6,-4,b,4";
+
+        try {
+            Calculator.add(input);
+            fail("Exception expected");
+        } catch (Exception e) {
+            assertThat(e.getMessage(), containsString("-4"));
+            assertThat(e.getMessage(), containsString("-6"));
+        }
+
+    }
+
+
+
 
 }

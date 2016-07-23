@@ -31,4 +31,12 @@ public class CalculatorTest {
         assertThat(result, equalTo(15));
     }
 
+    @Test
+    public void should_sum_multiple_numbers_with_newline_delimeter() {
+        final String input = "5,6,4\n10";
+        Integer result = Calculator.add(input);
+
+        assertThat(result, equalTo(25));
+    }
+
 }

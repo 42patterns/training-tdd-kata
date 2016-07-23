@@ -10,8 +10,8 @@ public class Calculator {
             return 0;
         }
 
-//        return addImperative(input);
-        return addFunctional(input);
+        return addImperative(input);
+//        return addFunctional(input);
     }
 
     private static Integer addImperative(String input) {
@@ -19,7 +19,10 @@ public class Calculator {
         int sum = 0;
         for (String e: el) {
             if (e.matches("[0-9]+")) {
-                sum += Integer.parseInt(e);
+                int i = Integer.parseInt(e);
+                if (i < 1000) {
+                    sum += i;
+                }
             }
         }
 

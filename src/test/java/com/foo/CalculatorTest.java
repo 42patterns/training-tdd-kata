@@ -15,4 +15,12 @@ public class CalculatorTest {
         assertThat(result, equalTo(0));
     }
 
+    @Test
+    public void should_return_input_for_single_param() {
+        final String input = "5";
+        Integer result = Calculator.add(input);
+
+        assertThat(result, equalTo(5));
+    }
+
 }

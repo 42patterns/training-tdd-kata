@@ -23,4 +23,12 @@ public class CalculatorTest {
         assertThat(result, equalTo(5));
     }
 
+    @Test
+    public void should_sum_multiple_numbers() {
+        final String input = "5,6,4";
+        Integer result = Calculator.add(input);
+
+        assertThat(result, equalTo(15));
+    }
+
 }

@@ -3,6 +3,8 @@ package com.foo;
 import java.util.Arrays;
 
 public class Calculator {
+    final static String DEFAULT_DELIMETER = "[\n,]";
+
     public static Integer add(String input) {
         if (input == null || "".equals(input.trim())) {
             return 0;
@@ -13,9 +15,7 @@ public class Calculator {
     }
 
     private static Integer addImperative(String input) {
-        final String delimiter = ",";
-
-        final String[] el = input.split(delimiter);
+        final String[] el = input.split(DEFAULT_DELIMETER);
         int sum = 0;
         for (String e: el) {
             sum += Integer.parseInt(e);
@@ -25,9 +25,7 @@ public class Calculator {
     }
 
     private static Integer addFunctional(String input) {
-        final String delimiter = ",";
-
-        return Arrays.stream(input.split(delimiter))
+        return Arrays.stream(input.split(DEFAULT_DELIMETER))
                 .map(Integer::parseInt)
                 .reduce(Integer::sum)
                 .orElse(0);

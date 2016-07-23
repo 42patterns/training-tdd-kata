@@ -1,13 +1,15 @@
 package com.foo;
 
+import java.util.Arrays;
+
 public class Calculator {
     public static Integer add(String input) {
         if (input == null || "".equals(input.trim())) {
             return 0;
         }
 
-        return addImperative(input);
-//        return addFunctional(input);
+//        return addImperative(input);
+        return addFunctional(input);
     }
 
     private static Integer addImperative(String input) {
@@ -23,6 +25,11 @@ public class Calculator {
     }
 
     private static Integer addFunctional(String input) {
-        return null;
+        final String delimiter = ",";
+
+        return Arrays.stream(input.split(delimiter))
+                .map(Integer::parseInt)
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 }
